@@ -78,8 +78,29 @@ function liriAction(myLiri, liriRespond) {
         var queryUrl = "http://www.omdbapi.com/?t=" + liriRespond + "&y=&plot=short&apikey=trilogy";
         request(queryUrl, function(error, response, body) {
             if (!error && response.statusCode === 200){
-                movie +JSON.parse(body);
+                movie + JSON.parse(body);
+                console.log(movie.Title);
+                console.log("Year: " + movie.Year);
+                if (movie.Ratings[0] !== undefined) {
+                    console.log("IMDB Rating: " + movie.Ratings[0].Value);
+                }
+                if (movie.Ratings[1] !== undefined) {
+                    concole.log("No rating provided.");
+                }
+                console.log("Location: " + movie.Country);
+                console.log("Language: " + movie.Language);
+                console.log("Plot: " + movie.Plot);
+                console.log("Actors: " + movie.Actors);
             }
-        })
+        });
+    } else {
+        if (myLiri !== "do-what-it-says" || "spotify-this-song" || "my-tweets" || "movie-this") {
+        console.log("The only valid commands for this application are as follows:");
+        console.log("do-what-it-says" + " to add any command to the random text file.");
+        console.log("spotify-this-song" + " to retrieve information on your favorite songs!");
+        console.log("my-tweets" + " to find out what is on Kyle\'s mind!");
+        console.log("movie-this" + " to retrieve information on your favorite movies!");
+        console.log("Hope you enjoy this little app of mine!!");
+        }
     }
 }
